@@ -56,7 +56,36 @@ public class UserService {
         return userResponseMapper.toUserResponse(user);
     }
 
-    public UserResponse updateUser(UserRequest request) {
+    public UserResponse updateUser(Integer Id, UserRequest request) {
+
+        User user =
+                userRepository
+                        .findById(Id)
+                        .orElseThrow(
+                                () -> new NotFoundException("User not found"));
+
+        if (Objects.nonNull(request.getFirstName()) && !request.getFirstName().isBlank()) {
+            user.setFirstName(request.getFirstName());
+        }
+
+        if (Objects.nonNull(request.getLastName()) && !request.getLastName().isBlank()) {
+            user.setLastName(request.getLastName());
+        }
+
+        if (Objects.nonNull(request.getPhone()) && !request.getPhone().isBlank()) {
+            user.setPhone(request.getPhone());
+        }
+
+        if (Objects.nonNull(request.getAddress()) && !request.getAddress().isBlank()) {
+            user.setAddress(request.getAddress());
+        }
+
+        userRepository.save(user);
+
+        return userResponseMapper.toUserResponse(user);
+    }
+
+    public UserResponse updateMe(UserRequest request) {
 
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
 
@@ -66,8 +95,22 @@ public class UserService {
                         .orElseThrow(
                                 () -> new NotFoundException("User with email " + email + " not found"));
 
-        user.setFirstName(request.getFirstName());
-        user.setLastName(request.getLastName());
+        // check if the field excist to update
+        if (Objects.nonNull(request.getFirstName()) && !request.getFirstName().isBlank()) {
+            user.setFirstName(request.getFirstName());
+        }
+
+        if (Objects.nonNull(request.getLastName()) && !request.getLastName().isBlank()) {
+            user.setLastName(request.getLastName());
+        }
+
+        if (Objects.nonNull(request.getPhone()) && !request.getPhone().isBlank()) {
+            user.setPhone(request.getPhone());
+        }
+
+        if (Objects.nonNull(request.getAddress()) && !request.getAddress().isBlank()) {
+            user.setAddress(request.getAddress());
+        }
 
         userRepository.save(user);
 

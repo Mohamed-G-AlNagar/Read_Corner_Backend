@@ -33,15 +33,15 @@ public class UserController {
         return userService.findUserById(id);
     }
 
-    @PutMapping("/update_me")
+    @PatchMapping("/update_me")
     public UserResponse updateLoggedinUser( @RequestBody UserRequest requestModel) {
-
-        return userService.updateUser(requestModel);
+        return userService.updateMe(requestModel);
     }
 
-    @PutMapping("/{id}")
-    public UserResponse updateUserById( @RequestBody UserRequest requestModel) {
-        return userService.updateUser(requestModel);
+
+    @PatchMapping("/{id}")
+    public UserResponse updateUserById(@PathVariable Integer id, @RequestBody UserRequest requestModel) {
+        return userService.updateUser(id,requestModel);
     }
 
 

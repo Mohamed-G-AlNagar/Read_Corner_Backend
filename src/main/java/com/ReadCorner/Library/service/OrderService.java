@@ -82,7 +82,12 @@ public class OrderService {
 
         // check if admin or order owner
         boolean belongToLoggedInUser = userService.isLoggedInUser(user.getId());
-        if (!userService.isAdminLoggedIn() || !belongToLoggedInUser) throw new NotAuthorizedException("Only Admin allowed or Orders Owner to retrieve orders");
+        if (!belongToLoggedInUser) {
+            // check if the logged-in user is  admin
+            if (!userService.isAdminLoggedIn()) {
+                throw new NotAuthorizedException("Only Admin or the order owner is allowed to retrieve this order.");
+            }
+        }
 
         List<Order> orders = orderRepository.findAllByUserId(userId);
 
