@@ -128,6 +128,12 @@ Stripe is used for handling payments for orders. Orders are initially marked as 
 ## Image Management
 Cloudinary is used to store book cover images, making the application scalable with image storage.
 
-![swagger0.png](..%2FAPI%20Documentation%2Fswagger%2Fswagger0.png)
+## Data Base ERD
+![DB ERD](https://github.com/user-attachments/assets/9b2270fe-7247-452b-b653-7c1ad3423236)
 
-![DB ERD.PNG](..%2FDB%20ERD.PNG)
+## Swagger Image
+![swagger0](https://github.com/user-attachments/assets/0d00b1d4-4ea0-4c73-b75a-b0abdeb25f8f)
+
+
+
+
