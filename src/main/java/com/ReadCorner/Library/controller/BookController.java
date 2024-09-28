@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
 
 @RestController
 @RequestMapping("/book")
 @RequiredArgsConstructor
-@Tag(name = "Book") // for issue swagger group called Book and group all below endpoints under it
+@Tag(name = "Book") // for issue swagger group called Book
 public class BookController {
     private final BookService bookService;
 
@@ -52,16 +51,6 @@ public class BookController {
     ) {
         return ResponseEntity.ok(bookService.getAllBooksByAuthor(page, size, author));
     }
-
-    // find all books by author
-//    @GetMapping("/top_Rating")
-//    public ResponseEntity<PageResponse<BookResponse>> getTopBooks(
-//            @RequestParam(name = "page", defaultValue = "0", required = false) int page,
-//            @RequestParam(name = "size", defaultValue = "10", required = false) int size
-//    ) {
-//        return ResponseEntity.ok(bookService.getAllTopReatedBooks(page, size));
-//    }
-
 
     // find book by id
     @GetMapping("/{id}")

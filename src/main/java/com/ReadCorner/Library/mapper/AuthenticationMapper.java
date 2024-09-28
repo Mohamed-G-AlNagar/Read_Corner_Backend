@@ -25,6 +25,8 @@ public class AuthenticationMapper {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
+                .phone(request.getPhone())
+                .address(request.getAddress())
                 .accountLocked(false)
                 .enabled(false)
                 .build();

@@ -22,18 +22,6 @@ public class JwtService {
     private String secretKey = "305c300d06092a864886f70d0101010500034b003048024100c3f9eeeb416425606f7604dd2185cea32306a8d183224047049d45c4ca9a9b834851b07df48d09ad1003d7faf01be9623c50710737ac89030e12da0787f294ef0203010001";
     ;
 
-    // -------------------- Extract the main parameter (user Email, userName)from the token
-//  3-  method to get the main parameter in the token (email or userName) which called subject
-    public String extractUserName(String token) {
-        return extractClaim(token, Claims::getSubject);
-    }
-
-    //    2- method to exctract all the parameters saved in the token (req for method 3)
-    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(token);
-        return claimsResolver.apply(claims);
-    }
-
     //    1- method to exctract all the parameters saved in the token (req for method 2)
     private Claims extractAllClaims(String token) {
         return Jwts
@@ -42,6 +30,17 @@ public class JwtService {
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
+    }
+
+//  2- method to exctract all the parameters saved in the token (req for method 3)
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(token);
+        return claimsResolver.apply(claims);
+    }
+
+//  3-  method to get the main parameter in the token (email or userName) which called subject
+    public String extractUserName(String token) {
+        return extractClaim(token, Claims::getSubject);
     }
 
     // min size id 256 bit

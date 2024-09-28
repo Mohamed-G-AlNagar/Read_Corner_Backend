@@ -44,13 +44,13 @@ public class Book extends BaseEntity {
 
 
     @Column(name = "book_cover")
-    private String bookCover; // This will store the URL of the image
+    private String bookCover;
 
     @Column(name = "image_name")
-    private String imageName; // This will store the name of the image
+    private String imageName;
 
     @Column(name = "image_path")
-    private String imagePath; // This will store the path of the image
+    private String imagePath;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference // Serialize Feedbacks in Book
@@ -67,59 +67,3 @@ public class Book extends BaseEntity {
                 .orElse(0.0);
     }
 }
-
-
-//
-//@Entity
-//@Table(name = "book")
-//@SuperBuilder
-//@EntityListeners(AuditingEntityListener.class) //enable automatic auditing of entity changes (createdDate, lastModifiedDate, CreatedBy , ...)
-//@Data
-//@AllArgsConstructor  // make no args constructor
-//@NoArgsConstructor  // make  args constructor
-//public class Book extends BaseEntity {
-//
-//    @Column(name = "title")
-//    private String title;
-//
-//    @Column(name = "author")
-//    private String author;
-//
-//    @Lob
-//    @Column(name = "description")
-//    private String description;
-//
-//    @Column(name = "total_copies")
-//    private int totalCopies;
-//
-//    @Column(name = "stock")
-//    private int stock;
-//
-//    @Column(name = "category")
-//    private String category;
-//
-//    @Column(name = "book_cover")
-//    private String bookCover;
-//
-//    @Column(name = "price")
-//    private Double price;
-//
-//    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JsonManagedReference // Serialize feedbacks in Book
-//    private List<Feedback> feedbacks;
-//
-//    @Transient
-//    public double getRate() {
-//        if (feedbacks == null || feedbacks.isEmpty()) {
-//            return 0.0;
-//        }
-//        var rate = this.feedbacks.stream()
-//                .mapToDouble(Feedback::getRate)
-//                .average()
-//                .orElse(0.0);
-//        double roundedRate = Math.round(rate * 10.0) / 10.0;
-//
-//        return roundedRate;
-//    }
-//
-//}

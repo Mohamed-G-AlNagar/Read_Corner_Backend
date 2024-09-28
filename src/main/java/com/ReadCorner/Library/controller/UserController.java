@@ -49,11 +49,5 @@ public class UserController {
     public GResponse deleteAccount(@PathVariable Integer id) {
         return userService.deleteAccount(id);
     }
-
-//    @DeleteMapping("/delete_me")
-//    public String deleteMyAccount() {
-//
-//        return userService.deleteAccount();
-//    }
-
+    
 }

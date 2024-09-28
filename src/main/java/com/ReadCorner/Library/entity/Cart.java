@@ -22,11 +22,11 @@ public class Cart extends BaseEntity {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @JsonBackReference // Prevent recursion
+    @JsonBackReference // to Prevent recursion
     private User user;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference // Serialize CartItems in Cart
+    @JsonManagedReference // To Serialize CartItems in Cart
     private List<CartItem> cartItems = new ArrayList<>();
 
     @Transient
@@ -46,38 +46,3 @@ public class Cart extends BaseEntity {
                 .orElse(null);
     }
 }
-
-
-//
-//@Entity
-//@Table(name = "cart")
-//@Data
-//@SuperBuilder
-//@EntityListeners(AuditingEntityListener.class) // to let the sys auto update (CreatedBy,....)
-//@AllArgsConstructor
-//public class Cart extends BaseEntity{
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id")
-//    @JsonManagedReference // The "parent" side of the relationship
-//    private User user;
-//
-//    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JsonManagedReference // The "parent" side of the relationship
-//    private List<CartItem> cartItems = new ArrayList<>();
-//
-//    public Cart() {
-//        this.cartItems = new ArrayList<>();
-//    }
-//
-//    @Transient
-//    public double getTotalPrice() {
-//        if (cartItems == null || cartItems.isEmpty()) {
-//            return 0.0;
-//        }
-//                double sum = cartItems.stream()
-//                .mapToDouble(CartItem::getBookPrice)
-//                .sum();
-//        System.out.println("-------************ total price = " + sum);
-//        return sum;
-//    }
-//}

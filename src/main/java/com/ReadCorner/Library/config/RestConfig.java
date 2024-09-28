@@ -23,12 +23,8 @@ public class RestConfig implements RepositoryRestConfigurer {
                 HttpMethod.PUT};
 
         config.exposeIdsFor(Book.class);
-//        config.exposeIdsFor(Review.class);
-//        config.exposeIdsFor(Message.class);
 
         disableHttpMethods(Book.class, config, theUnsupportedActions);
-//        disableHttpMethods(Review.class, config, theUnsupportedActions);
-//        disableHttpMethods(Message.class, config, theUnsupportedActions);
 
          // 2- CORS
         cors.addMapping(config.getBasePath() + "/**")

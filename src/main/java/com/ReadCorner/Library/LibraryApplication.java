@@ -5,10 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableAsync;
 
-
 @SpringBootApplication
 @EnableAsync
-@EnableJpaAuditing(auditorAwareRef = "auditorAware") // to auto identify the user id when needed in entities (Ex: createdby,...);
+@EnableJpaAuditing(auditorAwareRef = "auditorAware") // for createdBy, ...
 public class LibraryApplication {
 
 	public static void main(String[] args) {

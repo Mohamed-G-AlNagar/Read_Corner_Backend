@@ -27,7 +27,7 @@ public class FeedbackMapper {
         User user = feedback.getUser();
         return FeedbackResponse.builder()
                 .id(feedback.getId())
-                .rate(feedback.getRate())
+                .feedbackRate(feedback.getRate())
                 .comment(feedback.getComment())
                 .createdDate(feedback.getCreatedDate())
                 .userFullName(user.getFirstName() + " " + user.getLastName())

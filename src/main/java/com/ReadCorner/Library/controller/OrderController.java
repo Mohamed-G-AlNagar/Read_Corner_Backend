@@ -35,13 +35,13 @@ public class OrderController {
 
     @GetMapping("/success")
     public GResponse handlePaymentSuccess(@RequestParam("orderId") Integer orderId, @RequestParam("sessionId") String sessionId) {
-        // Update order status to PAID
+
         return paymentService.updateOrderStatusAfterPayment(orderId, true);
     }
 
     @GetMapping("/cancel")
     public GResponse handlePaymentCancellation(@RequestParam("orderId") Integer orderId, @RequestParam("sessionId") String sessionId) {
-        // Update order status to CANCELED
+
         return paymentService.updateOrderStatusAfterPayment(orderId, false);
     }
 

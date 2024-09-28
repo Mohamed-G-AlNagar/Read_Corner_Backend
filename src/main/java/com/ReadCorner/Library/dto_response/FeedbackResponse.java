@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Builder
 public class FeedbackResponse {
     private Integer id;
-    private Double rate;
+    private Double feedbackRate;
     private String comment;
     private String userFullName;
     private String userEmail;

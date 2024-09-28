@@ -15,11 +15,11 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
 @Data
-@SuperBuilder //to extends the builder functionality to subclasses
+@SuperBuilder 
 @AllArgsConstructor
 @NoArgsConstructor
 @MappedSuperclass
-//(to not issue db entity for it) indicate that the class is a base class for other entities, but it is not an entity itself.
+//(to not issue db entity for it, it's not an entity).
 @EntityListeners(AuditingEntityListener.class) // to let the sys auto update (CreatedBy,....)
 public class BaseEntity {
 

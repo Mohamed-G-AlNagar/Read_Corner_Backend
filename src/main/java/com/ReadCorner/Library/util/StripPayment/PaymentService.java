@@ -3,7 +3,6 @@ package com.ReadCorner.Library.util.StripPayment;
 import com.ReadCorner.Library.dto_response.GResponse;
 import com.ReadCorner.Library.entity.Cart;
 import com.ReadCorner.Library.entity.Order;
-import com.ReadCorner.Library.entity.OrderItem;
 import com.ReadCorner.Library.entity.OrderStatus;
 import com.ReadCorner.Library.exception.NotFoundException;
 import com.ReadCorner.Library.mapper.OrderMapper;
@@ -14,7 +13,6 @@ import com.ReadCorner.Library.service.OrderService;
 import com.stripe.Stripe;
 import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
-import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -90,8 +88,6 @@ public class PaymentService {
             cart.getCartItems().clear();
             cartRepository.save(cart);
             bookService.decreaseOrderBooksStock(order);
-            System.out.println("books Qty 1 " + order.getOrderItems().stream().map(i->i.getBook().getStock()).toList().toString());
-            System.out.println("----------------------------------------------");
 
         } else {
             order.setStatus(OrderStatus.CANCELED);
@@ -100,9 +96,6 @@ public class PaymentService {
         }
 
         orderRepository.save(order);
-      System.out.println("books Qty 2 " + order.getOrderItems().stream().map(i->i.getBook().getStock()).toList().toString());
-            System.out.println("----------------------------------------------");
-
         return GResponse.builder()
                 .status("SUCCESS")
                 .message(success ? "Payment successful, order updated to PAID" : "Payment failed, order updated to CANCELLED")
@@ -110,5 +103,4 @@ public class PaymentService {
                 .build();
 
     }
-
 }

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
-@Tag(name = "Authentication") // for issue swagger group called Authentication and group all below endpoints under it
+@Tag(name = "Authentication") // for issue swagger group
 public class AuthenticationController {
 
     private final AuthenticationService service;
@@ -34,17 +34,10 @@ public class AuthenticationController {
         return ResponseEntity.ok(service.authenticate(request));
     }
 
-    // token as params variable
     @GetMapping("/activate-account")
     public GResponse confirm(@RequestParam String token
     ) throws MessagingException {
         return service.activateAccount(token);
-    }
-
-    @GetMapping("/test")
-    public ResponseEntity<String> test() {
-        System.out.println("-----------Log test --------------------");
-        return ResponseEntity.ok("Hello from test endpoint!");
     }
 
 }

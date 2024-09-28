@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_EMPTY) // return the not empty
+@JsonInclude(JsonInclude.Include.NON_EMPTY) // return the not empty only
 public class ExceptionResponse {
     private Integer errorCode;
     private String errorDescription;

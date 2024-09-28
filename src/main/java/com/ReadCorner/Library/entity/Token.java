@@ -31,27 +31,3 @@ public class Token {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 }
-
-//@Data
-//@Builder
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@Entity
-//public class Token {
-//    @Id
-//    @GeneratedValue
-//    private Integer id;
-//
-//    @Column(unique = true)
-//    private String token;
-//    private LocalDateTime createdAt;
-//    private LocalDateTime expiresAt;
-//    private LocalDateTime validatedAt;
-//
-////    @ManyToOne(fetch = FetchType.LAZY)
-//    @ManyToOne
-//    @JoinColumn(name = "userId", nullable = false)
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    private User user;
-//
-//}

@@ -34,11 +34,11 @@ public class Order extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @JsonBackReference // Prevent recursion
+    @JsonBackReference // to Prevent recursion
     private User user;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference // Serialize OrderItems in Order
+    @JsonManagedReference // to Serialize OrderItems in Order
     private List<OrderItem> orderItems = new ArrayList<>();
 
     @Column(name = "cart_Id")
@@ -55,49 +55,3 @@ public class Order extends BaseEntity {
                 .orElse(0.0);
     }
 }
-
-
-//@Entity
-//@Data
-//@SuperBuilder
-//@EntityListeners(AuditingEntityListener.class) // to let the sys auto update (CreatedBy,....)
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@Table(name = "`order`") // Important note , order is reserved in mysql so to call the table order should be escaped by backticks(`)
-//public class Order extends BaseEntity {
-//
-//    @Column(name = "order_date", nullable = false)
-//    private LocalDateTime orderDate;
-//
-//    @Enumerated(EnumType.STRING)
-//    @Column(name = "status")
-//    private OrderStatus status = OrderStatus.PENDING;
-//
-//    @Column(name = "total_amount")
-//    private Double totalAmount;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id")
-//    @JsonBackReference
-//    private User user;
-//
-//    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JsonManagedReference
-//    private List<OrderItem> orderItems = new ArrayList<OrderItem>();
-//
-//    @Column(name = "cart_Id")
-//    private Integer cartId;
-//
-//    @Transient
-//    public double getTotalPrice() {
-//        if (orderItems == null || orderItems.isEmpty()) {
-//            return 0.0;
-//        }
-//        double price = this.orderItems.stream()
-//                .mapToDouble(OrderItem::getPrice)
-//                .average()
-//                .orElse(0.0);
-//
-//        return price;
-//    }
-//}

@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class PageResponseMapper {
 
-    // Generic method to convert an EntityResponse to PageResponse
+    //convert an EntityResponse to PageResponse as generic
     public <T> PageResponse<T> toPageResponse(List<T> content, Page<?> page) {
         return new PageResponse<>(
                 content,

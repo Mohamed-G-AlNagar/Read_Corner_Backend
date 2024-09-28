@@ -36,21 +36,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         System.out.println("Request URL: " + request.getRequestURL());
         System.out.println("Request Header Authorization: " + request.getHeader("Authorization"));
 
-        if (request.getServletPath().contains("/auth")) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-
-        if (request.getMethod().equalsIgnoreCase("GET") && request.getServletPath().startsWith("/book")) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-
         final String authHeader = request.getHeader("Authorization");
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            System.out.println("Authorization header is missing or does not start with 'Bearer '");
-            sendErrorResponse(response, HttpServletResponse.SC_UNAUTHORIZED, "Please log in first.");
+            filterChain.doFilter(request, response);
             return;
         }
 

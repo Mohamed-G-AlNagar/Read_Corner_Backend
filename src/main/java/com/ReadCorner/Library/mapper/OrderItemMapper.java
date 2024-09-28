@@ -21,12 +21,11 @@ public class OrderItemMapper {
                 .build();
     }
 
-    // Convert CartItem entity to OrderItem entity
     public OrderItem mapCartItemToOrderItem(CartItem cartItem) {
         return OrderItem.builder()
                 .quantity(cartItem.getQuantity())
                 .book(cartItem.getBook())
-                .price(cartItem.getBook().getPrice() * cartItem.getQuantity()) // Calculate price based on quantity and book price
+                .price(cartItem.getBook().getPrice() * cartItem.getQuantity())
                 .build();
     }
 }

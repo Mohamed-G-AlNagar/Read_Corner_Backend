@@ -2,7 +2,6 @@ package com.ReadCorner.Library.mapper;
 
 import com.ReadCorner.Library.dto_response.UserResponse;
 import com.ReadCorner.Library.entity.User;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
