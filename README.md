@@ -38,7 +38,7 @@ documentation URL : https://documenter.getpostman.com/view/32077555/2sAXqy4fDi
     - CRUD operations for books
     - Pagination and sorting
     - Search books by category, Author or Title 
-    - Image upload to cloud for book covers
+    - Image `upload to cloud` for book covers
 
 3. **Shopping Cart**
     - Add/remove items from cart
@@ -48,7 +48,7 @@ documentation URL : https://documenter.getpostman.com/view/32077555/2sAXqy4fDi
 4. **Order Management**
     - Create orders from cart
     - Update order status
-    - Integrate with Stripe for payments
+    - Integrate with `Stripe` for payments
     - View orders (all, by status, by user)
 
 5. **User Management**
