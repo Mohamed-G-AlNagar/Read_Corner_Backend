@@ -14,7 +14,7 @@ documentation URL : https://documenter.getpostman.com/view/32077555/2sAXqy4fDi
 
 ### Noting that: 
 - All inial data will be added to local DB automaticaly on first run.
-- Admin user -> mag3789"gmail , pass : m.A123456789
+- Admin user -> mag3789@gmail.com , pass : m.A123456789
   
 ## Technologies Used
 
