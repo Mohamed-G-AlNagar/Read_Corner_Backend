@@ -16,7 +16,7 @@ public class BookResponse {
     private String title;
     private String author;
     private String category;
-    private int stock;
+    private Integer stock;
     private Double price;
     private String bookCover;
     private double rating;

@@ -113,11 +113,14 @@ public class BookServiceImp implements BookService {
         Book book = bookRepository.findById(id).orElseThrow(() -> new NotFoundException("Book not found"));
 
         // Delete the book cover image from Cloudinary
-        String publicId = cloudinaryService.getPublicIdFromUrl(book.getBookCover());
-        try {
-            cloudinaryService.deleteImage(publicId);
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to delete image from Cloudinary", e);
+        if(book.getBookCover() != null)
+        {
+            String publicId = cloudinaryService.getPublicIdFromUrl(book.getBookCover());
+            try {
+                cloudinaryService.deleteImage(publicId);
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to delete image from Cloudinary", e);
+            }
         }
 
         bookRepository.delete(book);

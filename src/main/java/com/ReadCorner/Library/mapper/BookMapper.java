@@ -47,6 +47,7 @@ public class BookMapper {
                 .category(book.getCategory())
                 .price(book.getPrice())
                 .stock(book.getStock())
+                .totalCopies(book.getTotalCopies())
                 .bookCover(book.getBookCover())
                 .rating(book.getRate())
                 .description(book.getDescription())

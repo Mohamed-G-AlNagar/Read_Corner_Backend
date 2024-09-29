@@ -15,6 +15,7 @@ import java.util.List;
 public class BookDetailedResponse extends BookResponse {
 
     private String description;
+    private Integer totalCopies;
     private List<FeedbackResponse> feedbacks;
 
 }
