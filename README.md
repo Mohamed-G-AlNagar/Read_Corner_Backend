@@ -12,6 +12,10 @@ After starting the application, visit `http://localhost:8080/swagger-ui/index.ht
 API documentation is also available via Postman.
 documentation URL : https://documenter.getpostman.com/view/32077555/2sAXqy4fDi
 
+### Noting that: 
+- All inial data will be added to local DB automaticaly on first run.
+- Admin user -> mag3789@gmail.com , pass : m.A123456789
+  
 ## Technologies Used
 
 - Java 21
@@ -108,7 +112,6 @@ documentation URL : https://documenter.getpostman.com/view/32077555/2sAXqy4fDi
 - DELETE `/user/{id}`: Delete a user account
 
 ## Setup and Installation
-
 1. Clone the repository - git clone <repository-url>
 2. Update `application.yml` with the required configurations:
    MySQL Database credentials or can uncomment the hosted DB.
