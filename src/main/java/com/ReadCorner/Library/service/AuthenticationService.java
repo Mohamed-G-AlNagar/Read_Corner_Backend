@@ -9,4 +9,7 @@ public interface AuthenticationService {
     GResponse register(RegisterRequest request) throws MessagingException;
     GResponse authenticate(AuthenticationRequest request);
     GResponse activateAccount(String token) throws MessagingException;
+    GResponse requestResetPassword(String email) throws MessagingException;
+
+    GResponse confirmResetPassword(String token, String newPassword) throws MessagingException;
 }

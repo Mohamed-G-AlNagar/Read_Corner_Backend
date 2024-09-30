@@ -44,6 +44,9 @@ public class AuthenticationServiceImp implements AuthenticationService {
     @Value("${application.mailing.frontend.activation-url}")
     private String activationUrl ;
 
+    @Value("${application.mailing.frontend.reset-pass-url}")
+    private String resetPassUrl ;
+
 
     public GResponse register(RegisterRequest request) throws MessagingException {
 
@@ -104,7 +107,7 @@ public class AuthenticationServiceImp implements AuthenticationService {
         }
 
         // get the user if exist
-        var user = userRepository.findById(savedToken.getUser().getId())
+        User user = userRepository.findById(savedToken.getUser().getId())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         // activate the account and save it again
         user.setEnabled(true);
@@ -116,6 +119,62 @@ public class AuthenticationServiceImp implements AuthenticationService {
         return authenticationMapper.toActivateResponse("SUCCESS","Email has been activated");
     }
 
+    /*-----------------------------Reset Password---------------------------------------*/
+    public GResponse requestResetPassword(String email) throws MessagingException {
+
+        System.out.println("email = "+email);
+        User user = repository.findByEmail(email)
+                .orElseThrow(() -> new NotFoundException("Email is incorrect"));
+
+        // check if account activated
+        if (!user.isEnabled()){
+            throw new RuntimeException("Please activate your mail first");
+        };
+
+        sendResetPassUsingTokenEmail(user);
+        return GResponse.builder()
+                .status("SUCCESS")
+                .message("Reset Password Token has been sent successfully to email")
+                .build();
+    }
+
+
+    public GResponse confirmResetPassword(String token, String newPassword) throws MessagingException {
+        Token savedToken = tokenRepository.findByToken(token)
+                .orElseThrow(() -> new RuntimeException("Invalid token"));
+
+        if (LocalDateTime.now().isAfter(savedToken.getExpiresAt())) {
+            sendResetPassUsingTokenEmail(savedToken.getUser());
+            throw new RuntimeException("Reset Pass token has expired. A new token has been send to the same email address");
+        }
+
+        User user = userRepository.findById(savedToken.getUser().getId())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        // Reset Pass
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+
+        savedToken.setValidatedAt(LocalDateTime.now());
+        savedToken.setExpiresAt(LocalDateTime.now());
+        tokenRepository.save(savedToken);
+        return GResponse.builder()
+                .status("SUCCESS")
+                .message("Password has been reset")
+                .build();
+    }
+
+    private void sendResetPassUsingTokenEmail(User user) throws MessagingException {
+        var newToken = generateAndSaveActivationToken(user);
+
+        emailService.sendEmail(
+                user.getEmail(),
+                user.getFullName(),
+                EmailTemplateName.RESET_PASSWORD,
+                resetPassUrl,
+                newToken,
+                "Account Reset Password"
+        );
+    }
     /*---------------- Validate email using sending activation token------------------*/
 
     private void sendValidationEmail(User user) throws MessagingException {

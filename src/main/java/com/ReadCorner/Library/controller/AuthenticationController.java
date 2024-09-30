@@ -3,6 +3,8 @@ package com.ReadCorner.Library.controller;
 
 import com.ReadCorner.Library.dto_request.AuthenticationRequest;
 import com.ReadCorner.Library.dto_request.RegisterRequest;
+import com.ReadCorner.Library.dto_request.ResetPass;
+import com.ReadCorner.Library.dto_request.ResetPassRequest;
 import com.ReadCorner.Library.dto_response.GResponse;
 import com.ReadCorner.Library.service.AuthenticationService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,6 +34,16 @@ public class AuthenticationController {
             @RequestBody AuthenticationRequest request
     ) {
         return ResponseEntity.ok(service.authenticate(request));
+    }
+
+    @PostMapping("/forgot-password-request")
+    public GResponse forgotPass(@RequestBody @Valid ResetPassRequest requestBody) throws MessagingException {
+        return service.requestResetPassword(requestBody.getEmail());
+    }
+
+    @PostMapping("/reset-password-confirm")
+    public GResponse resetPass(@RequestParam String token, @RequestBody @Valid ResetPass requestBody) throws MessagingException {
+        return service.confirmResetPassword(token, requestBody.getNewPassword());
     }
 
     @GetMapping("/activate-account")
