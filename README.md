@@ -37,6 +37,7 @@ documentation URL : https://documenter.getpostman.com/view/32077555/2sAXqy4fDi
     - User registration with email verification
     - User login with JWT-based authentication.
     - Account activation via token.
+    - Reset Forgoted Password using token sent to email
 
 2. **Book Management**
     - CRUD operations for books
@@ -69,6 +70,8 @@ documentation URL : https://documenter.getpostman.com/view/32077555/2sAXqy4fDi
 - POST `/auth/register`: Register a new user
 - POST `/auth/login`: Authenticate a user
 - GET `/auth/activate-account`: Activate a user account
+- POST `/forgot-password-request` : Forgot password - Send token code and link to email.
+- POST`/reset-password-confirm` : Reset password after confirm using token
 
 ### Books
 - GET `/book/`: Get all books (paginated)
